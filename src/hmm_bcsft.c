@@ -336,14 +336,14 @@ double step_bcsftb(int gen1, int gen2, double rf, double junk, int *cross_scheme
     if(rf < TOL) rf = TOL;
 
     prob_bcsft(rf, s, t, transpr);
-
+    double h = 0.7;
     /* expand when phase is known */
     if(t > 0) { /* only if Ft in play */
-      transpr[1] /= 2.0; /* B1 split */
-      transpr[6] /= 2.0; /* B0 split */
-      transpr[3] /= 2.0; /* D split */
-      transpr[4] /= 2.0; /* E split */
-      transpr[8] -= M_LN2; /* log(pr(gen1=2)) = log(pr(gen2=3)) */
+      transpr[1] /= (1.0/h); /* B1 split */
+      transpr[6] /= (1.0/h); /* B0 split */
+      transpr[3] /= (1.0/h); /* D split */
+      transpr[4] /= (1.0/h); /* E split */
+      transpr[8] -= log(1.0/h); /* log(pr(gen1=2)) = log(pr(gen2=3)) */
     }
 
     /* put probabilities on log scale */
