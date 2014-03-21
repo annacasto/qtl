@@ -280,7 +280,7 @@ double init_bcsftb(int true_gen, int *cross_scheme)
     if(s == 0) {  /* Ft */
       //SKT mod: true probability for a single marker 
       init2 = log(R_pow((h), (t)));            	/* Aa */
-      init1 = log((1.0-R_pow((h),t))/2);    	/* AA */
+      init1 = log((1.0-R_pow((h),t))/2.0);    	/* AA */
       //init2 = - t * M_LN2;                            /* Aa: log(2 ^ -t) */
       //init1 = log1p(-exp(init2 + M_LN2)) - M_LN2;     /* AA: log((1 - 2^(1-t)) / 2) */
       init3 = init2;                                    /* aA: */
