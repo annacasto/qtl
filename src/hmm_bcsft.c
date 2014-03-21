@@ -261,7 +261,7 @@ double step_bcsft(int gen1, int gen2, double rf, double junk, int *cross_scheme)
 /****************************************************************************/
 
 /* init, emit and step functions with phase-known genotypes 
-   (i.e. the 4-state chain: AA, Aa, aA, aa             */
+   (i.e. the 4-state chain: AA, Aa, aA, aa)             */
 
 double init_bcsftb(int true_gen, int *cross_scheme)
 {
@@ -278,10 +278,13 @@ double init_bcsftb(int true_gen, int *cross_scheme)
     t = cross_scheme[1];
 
     if(s == 0) {  /* Ft */
-      init2 = - t * M_LN2;                           /* Aa: log(2 ^ -t) */
-      init1 = log1p(-exp(init2 + M_LN2)) - M_LN2;    /* AA: log((1 - 2^(1-t)) / 2) */
-      init3 = init2;                                 /* aA: */
-      init4 = init1;                                 /* aa: */
+      //SKT mod: true probability for a single marker 
+      init2 = log(R_pow((1/2), t));            	        /* Aa */
+      init1 = log((1.0-R_pow((1.0/2.0),t))/2);    	/* AA */
+      //init2 = - t * M_LN2;                            /* Aa: log(2 ^ -t) */
+      //init1 = log1p(-exp(init2 + M_LN2)) - M_LN2;     /* AA: log((1 - 2^(1-t)) / 2) */
+      init3 = init2;                                    /* aA: */
+      init4 = init1;                                    /* aa: */
     }
     if(s > 0) {
       if(t == 0) { /* BCs */
@@ -1384,12 +1387,6 @@ void prob_ft(double rf, int t, double *transpr)
 
   transpr[8] = transpr[1] + transpr[3] + transpr[4] + transpr[1];
   transpr[8] = log(transpr[8]);				/* Aa */
-  
-  //true probability for a single marker 
-  //transpr[8] = log(pow(h, t1));            	/* Aa */
-  //transpr[7] = log((1 - pow(h, t1))/2);    	/* AA */
-  //transpr[9] = transpr[7];  			/* aa */
-
 
   return;
 }
