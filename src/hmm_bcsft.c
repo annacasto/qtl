@@ -263,7 +263,7 @@ double step_bcsft(int gen1, int gen2, double rf, double junk, int *cross_scheme)
 /* init, emit and step functions with phase-known genotypes 
    (i.e. the 4-state chain: AA, Aa, aA, aa)             */
 
-double init_bcsftb(int true_gen, int *cross_scheme, int h)
+double init_bcsftb(int true_gen, int *cross_scheme)
 {
   static double init1 = 0;
   static double init2 = 0;
@@ -271,7 +271,7 @@ double init_bcsftb(int true_gen, int *cross_scheme, int h)
   static double init4 = 0;
   static int s = -1;
   static int t = -1;
-  
+  double h=0.5;
   /* static variables used frequently */
   if(s != cross_scheme[0] || t != cross_scheme[1] || init1 == 0) {
     s = cross_scheme[0];
