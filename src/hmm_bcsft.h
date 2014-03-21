@@ -35,13 +35,13 @@
  *
  **********************************************************************/
 
-double init_bcsft(int true_gen, int *cross_scheme, int h);
+double init_bcsft(int true_gen, int *cross_scheme);
 
 double emit_bcsft(int obs_gen, int true_gen, double error_prob, int *cross_scheme);
 
 double step_bcsft(int gen1, int gen2, double rf, double junk, int *cross_scheme);
 
-double init_bcsftb(int true_gen, int *cross_scheme);
+double init_bcsftb(int true_gen, int *cross_scheme, int h);
 
 double emit_bcsftb(int obs_gen, int true_gen, double error_prob, int *cross_scheme);
 
