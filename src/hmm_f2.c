@@ -124,7 +124,7 @@ double emit_f2b(int obs_gen, int true_gen, double error_prob, int *cross_scheme)
   case 3: 							/*observed = aa*/
     switch(true_gen) {
     case 4: return(log(1.0-error_prob)); 				/*true = aa*/
-    case 1: case 2: case 3: return(log(error_prob)-M_LN2); ? 		/*true = AA, Aa, aA*/
+    case 1: case 2: case 3: return(log(error_prob)-M_LN2);  		/*true = AA, Aa, aA*/
     }
   case 4: /* AA or AB (not BB) */
     if(true_gen != 4) return(log(1.0-error_prob/2.0));
