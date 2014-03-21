@@ -263,7 +263,7 @@ double step_bcsft(int gen1, int gen2, double rf, double junk, int *cross_scheme)
 /* init, emit and step functions with phase-known genotypes 
    (i.e. the 4-state chain: AA, Aa, aA, aa)             */
 
-double init_bcsftb(int true_gen, int *cross_scheme)
+double init_bcsftb(int true_gen, int *cross_scheme, int h)
 {
   static double init1 = 0;
   static double init2 = 0;
@@ -279,8 +279,8 @@ double init_bcsftb(int true_gen, int *cross_scheme)
 
     if(s == 0) {  /* Ft */
       //SKT mod: true probability for a single marker 
-      init2 = log(R_pow((1.0/2.0), (t)));            	/* Aa */
-      init1 = log((1.0-R_pow((1.0/2.0),t))/2);    	/* AA */
+      init2 = log(R_pow((h), (t)));            	/* Aa */
+      init1 = log((1.0-R_pow((h),t))/2);    	/* AA */
       //init2 = - t * M_LN2;                            /* Aa: log(2 ^ -t) */
       //init1 = log1p(-exp(init2 + M_LN2)) - M_LN2;     /* AA: log((1 - 2^(1-t)) / 2) */
       init3 = init2;                                    /* aA: */
