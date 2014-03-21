@@ -271,7 +271,7 @@ double init_bcsftb(int true_gen, int *cross_scheme)
   static double init4 = 0;
   static int s = -1;
   static int t = -1;
-  double h=0.5;
+  double h=0.7;
   /* static variables used frequently */
   if(s != cross_scheme[0] || t != cross_scheme[1] || init1 == 0) {
     s = cross_scheme[0];
@@ -1321,7 +1321,8 @@ void prob_ft(double rf, int t, double *transpr)
   double u, d;
   //double h = 0.719685673;  //e^(ln(percentage)/(t-1));
   //double h = 0.6059627021;
-  double h = 0.50;
+  //double h = 0.50;
+  double h = 0.7;
   //double h = 0.6812920691;
   //double h = 0.5574255561;
   //double h = 0.7023121919;
@@ -1329,11 +1330,7 @@ void prob_ft(double rf, int t, double *transpr)
   double hpowt;
   double r2, r3, r4, r5, u2, u3, u4, d2;
   int i;
-  double hetExpPr[10];
   char text[200];
-
-  for(k=0; k<10; k++)
-    hetExpPr[k] = 0.0;
     
   r = rf;
   if ((r > 0.4999999) && (r < 0.5000001)) {
