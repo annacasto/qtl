@@ -35,8 +35,7 @@ double stepfc(int obs1, int obs2, int mar, double **probmat);
 void forward_prob(int i, int n_mar, int n_gen, int curpos, int *cross_scheme, double error_prob,
 		  int **Geno, double **probmat, double **alpha,
 		  double initf(int, int *), 
-		  double emitf(int, int, double, int *),
-		  int h);
+		  double emitf(int, int, double, int *));
 
 void backward_prob(int i, int n_mar, int n_gen, int curpos, int *cross_scheme, double error_prob,
 		   int **Geno, double **probmat, double **beta,
