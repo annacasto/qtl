@@ -109,20 +109,22 @@ double emit_f2b(int obs_gen, int true_gen, double error_prob, int *cross_scheme)
 {
   switch(obs_gen) {
   case 0: return(0.0);
-  case 1: 
-    switch(true_gen) {
-    case 1: return(log(1.0-error_prob));
-    case 2: case 3: case 4: return(log(error_prob)-M_LN2);
+  case 1							/*observed = AA*/
+    switch(true_gen) {			
+    case 1: return(log(1.0-error_prob));				/*true = AA*/				
+    case 2: case 3: case 4: return(log(error_prob)-M_LN2);		/*true = Aa, aA, aa*/
+    //case 1: return(log(1.0-error_prob));
+    //case 2: case 3: case 4: return(log(error_prob)-M_LN2);
     }
-  case 2: 
+  case 2: 							/*observed = Aa*/
     switch(true_gen) {
-    case 1: case 4: return(log(error_prob)-M_LN2);
-    case 2: case 3: return(log(1.0-error_prob));
+    case 1: case 4: return(log(error_prob)-M_LN2); 			/* true = AA, aa*/
+    case 2: case 3: return(log(1.0-error_prob)); 			/* true = Aa, aA*/
     }
-  case 3:
+  case 3: 							/*observed = aa*/
     switch(true_gen) {
-    case 4: return(log(1.0-error_prob));
-    case 1: case 2: case 3: return(log(error_prob)-M_LN2);
+    case 4: return(log(1.0-error_prob)); 				/*true = aa*/
+    case 1: case 2: case 3: return(log(error_prob)-M_LN2); ? 		/*true = AA, Aa, aA*/
     }
   case 4: /* AA or AB (not BB) */
     if(true_gen != 4) return(log(1.0-error_prob/2.0));
