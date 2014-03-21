@@ -1385,9 +1385,9 @@ void prob_ft(double rf, int t, double *transpr)
   //transpr[8] = transpr[1] + transpr[3] + transpr[4] + transpr[1];
   //transpr[8] = log(transpr[8]);				/* Aa */
  /* marginal probabilities for a single marker from the joint probability function*/
-  transpr[7] = log((1.0-R_pow(0.5,t1))/2);    		/* AA */
+  transpr[7] = log((1.0-R_pow(0.5,(t-1.0)))/2.0);    		/* AA */
   transpr[9] = transpr[7];				/* aa */
-  transpr[8] = log((R_pow(0.5,t1)));  			/* Aa */
+  transpr[8] = log((R_pow(0.5,(t-1.0))));  			/* Aa */
 
   return;
 }
