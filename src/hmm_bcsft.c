@@ -1378,12 +1378,16 @@ void prob_ft(double rf, int t, double *transpr)
   //sprintf(text, "%s\t%f\t%f\t%f\n", "Marginal probabilities 7, 8, 9: ", transpr[7], transpr[8], transpr[9]);
   //Rprintf(text);
   /* marginal probabilities for a single marker from the joint probability function*/
-  transpr[7] = transpr[0] + transpr[1] + transpr[2];    /* AA */
-  transpr[7] = log(transpr[7]);				 
-  transpr[9] = transpr[7];				/* aa */
+  //transpr[7] = transpr[0] + transpr[1] + transpr[2];    /* AA */
+  //transpr[7] = log(transpr[7]);				 
+  //transpr[9] = transpr[7];				/* aa */
 
-  transpr[8] = transpr[1] + transpr[3] + transpr[4] + transpr[1];
-  transpr[8] = log(transpr[8]);				/* Aa */
+  //transpr[8] = transpr[1] + transpr[3] + transpr[4] + transpr[1];
+  //transpr[8] = log(transpr[8]);				/* Aa */
+ /* marginal probabilities for a single marker from the joint probability function*/
+  transpr[7] = log((1.0-R_pow(0.5,t1))/2);    		/* AA */
+  transpr[9] = transpr[7];				/* aa */
+  transpr[8] = log((R_pow(0.5,t1)));  			/* Aa */
 
   return;
 }
