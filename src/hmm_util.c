@@ -84,7 +84,7 @@ void forward_prob(int i, int n_mar, int n_gen, int curpos, int *cross_scheme, do
   errortol = error_prob;
   if(curpos > 0) errortol = TOL;
   for(v=0; v<n_gen; v++)
-    alpha[v][0] = initf(v+1, cross_scheme, h) + emitf(Geno[0][i], v+1, errortol, cross_scheme);
+    alpha[v][0] = initf(v+1, cross_scheme) + emitf(Geno[0][i], v+1, errortol, cross_scheme);
   if(curpos == 0) errortol = TOL;
 
   for(j=1; j<n_mar; j++) {
