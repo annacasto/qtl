@@ -109,7 +109,7 @@ double emit_f2b(int obs_gen, int true_gen, double error_prob, int *cross_scheme)
 {
   switch(obs_gen) {
   case 0: return(0.0);
-  case 1							/*observed = AA*/
+  case 1:							/*observed = AA*/
     switch(true_gen) {			
     case 1: return(log(1.0-error_prob));				/*true = AA*/				
     case 2: case 3: case 4: return(log(error_prob)-M_LN2);		/*true = Aa, aA, aa*/
