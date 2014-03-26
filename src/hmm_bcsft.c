@@ -1327,7 +1327,7 @@ void prob_ft(double rf, int t, double *transpr)
   //double h = 0.5574255561;
   //double h = 0.7023121919;
 
-  double hpowt;
+  double hpowt, h2;
   double r2, r3, r4, r5, u2, u3, u4, d2;
   int i;
   char text[200];
@@ -1341,13 +1341,17 @@ void prob_ft(double rf, int t, double *transpr)
 	  r = 0.0000001;
   }
 
-  u=(2.0*h)/(2.0-2.0*h);
+  //u=(2.0*h)/(2.0-2.0*h);
 
   hpowt = R_pow(h, t);
+  h2 = R_pow(h, 2.0);
+
   r2 = R_pow(r, 2.0);
   r3 = R_pow(r, 3.0);
   r4 = R_pow(r, 4.0);
   r5 = R_pow(r, 5.0);
+
+  u = (-(sqrt((2*h-4*h2)*r2+(4*h2-2*h)*r-h2+h) - 2*h*r2 + 2*h*r)) / (2*h*r2-2*h*r+h-1);
 
   u2 = R_pow(u, 2.0);
   u3 = R_pow(u, 3.0);
