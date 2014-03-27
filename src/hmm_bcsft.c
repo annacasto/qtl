@@ -1318,6 +1318,7 @@ void prob_ft(double rf, int t, double *transpr)
     
   double r = rf;
   double B_11, B_12, B_14, B_22, B_23;
+  double p1, p2, p3, p4, p5;
   double u, d;
   //double h = 0.719685673;  //e^(ln(percentage)/(t-1));
   //double h = 0.6059627021;
@@ -1351,7 +1352,7 @@ void prob_ft(double rf, int t, double *transpr)
   r4 = R_pow(r, 4.0);
   r5 = R_pow(r, 5.0);
 
-  u = (-(sqrt((2*h-4*h2)*r2+(4*h2-2*h)*r-h2+h) - 2*h*r2 + 2*h*r)) / (2*h*r2-2*h*r+h-1);
+  u =  -(2.0*h*r - r + sqrt((r2 - 2.0*h*r + h)*(2.0*h*r - 2.0*r - h + r2 + 1.0)) - 2.0*h*r2 + r2)/(h + 2.0*r - 2.0*h*r + 2.0*h*r2 - 2.0*r2 - 1.0);
 
   u2 = R_pow(u, 2.0);
   u3 = R_pow(u, 3.0);
@@ -1360,6 +1361,17 @@ void prob_ft(double rf, int t, double *transpr)
   d=2.0*(R_pow((1.0-r),2))+8.0*u*r*(1-r)+ 2.0*(r2)+ 2.0*(u2)*((R_pow((1.0-r),2.0))+(r2));
 
   d2 = R_pow(d, 2.0);
+  
+
+  p1 = (1/2)*((2*(- 8*r3*u3 + 8*r3*u2 + 12*r2*u3 - 12*r2*u2 - 2*d*r2*u + d*r2 - 4*r*u3 + 8*r*u2 + 2*d*r*u - 2*d*r - 2*u2 + d))/((d + 4*r*u2 - 2*u2)*(- 4*r2*u2 + 4*r*u2 - 2*u2 + d)) - (d*R_pow((-(4*r*u2 - 2*u2)/d),t))/(2*(d*u2 + 4*r*u4 - 2*u4)) + (4*hpowt*(- u*r2 + u*r))/(h*(4*r2*u2 - 4*r*u2 + 2*u2 - d*h)) + (d*R_pow(((4*r2*u2 - 4*r*u2 + 2*u2)/d),t))*(16*r2*u2 - 16*r3*u2 + 8*r4*u2 - d*h - 8*r*u2 + 2*u2 - 4*d*r2*u + 2*d*h*r + 4*d*r*u - 2*d*h*r2 - 4*d*h*r*u + 4*d*h*r2*u))/(2*(2*r2*u2 - 2*r*u2 + u2)*(32*r2*u4 - 32*r3*u4 + 16*r4*u4 + d2*h - 2*d*u2 - 16*r*u4 + 4*u4 + 4*d*r*u2 - 4*d*r2*u2 - 2*d*h*u2 + 4*d*h*r*u2 - 4*d*h*r2*u2)));
+  
+  p2 = (1/2)*((d*R_pow((-(4*r*u2 - 2*u2)/d),t))/(2*(d*u2 + 4*r*u4 - 2*u4)) + (2*(- 8*r3*u3 + 12*r2*u3 - 2*d*r2*u + d*r2 - 4*r*u3 + 2*d*r*u))/((d + 4*r*u2 - 2*u2)*(- 4*r2*u2 + 4*r*u2 - 2*u2 + d)) + (4*hpowt*(- u*r2 + u*r))/(h*(4*r2*u2 - 4*r*u2 + 2*u2 - d*h)) + (d*R_pow(((4*r2*u2 - 4*r*u2 + 2*u2)/d),t))*(16*r2*u2 - 16*r3*u2 + 8*r4*u2 - d*h - 8*r*u2 + 2*u2 - 4*d*r2*u + 2*d*h*r + 4*d*r*u - 2*d*h*r2 - 4*d*h*r*u + 4*d*h*r2*u))/(2*(2*r2*u2 - 2*r*u2 + u2)*(32*r2*u4 - 32*r3*u4 + 16*r4*u4 + d2*h - 2*d*u2 - 16*r*u4 + 4*u4 + 4*d*r*u2 - 4*d*r2*u2 - 2*d*h*u2 + 4*d*h*r*u2 - 4*d*h*r2*u2)));
+  
+  p3 = (1/4)*((4*d*(- r2 + r)*R_pow(((4*r2*u2 - 4*r*u2 + 2*u2)/d),t))/((2*u*r2 - 2*u*r + u)*(4*r2*u2 - 4*r*u2 + 2*u2 - d*h)) - (8*hpowt*(- u*r2 + u*r))/(h*(4*r2*u2 - 4*r*u2 + 2*u2 - d*h)));
+  
+  p4 = (d*R_pow(((4*r2*u2 - 4*r*u2 + 2*u2)/d),t))/(4*(2*r2*u2 - 2*r*u2 + u2)) - (d*R_pow((-(4*r*u2 - 2*u2)/d),t))/(4*(2*r*u2 - u2));
+  
+  p5 = (d*R_pow(((4*r2*u2 - 4*r*u2 + 2*u2)/d),t))/(4*(2*r2*u2 - 2*r*u2 + u2)) + (d*R_pow((-(4*r*u2 - 2*u2)/d),t))/(4*(2*r*u2 - u2));
 
   B_11 = (1.0/2.0)*((4.0*r4*u2)/(d2 - 4.0*d*r2*u2 + 8.0*d*r*u2 - 4.0*d*u2 - 16.0*r3*u4 + 24.0*r2*u4 - 16.0*r*u4 + 4.0*u4) - (8.0*(h/2.0 - 1.0/2.0)*(- u*r2 + u*r))/(d - 4.0*r2*u2 - d*h + 2.0*h*u2 + 4.0*r*u2 - 2.0*u2 - 4.0*h*r*u2 + 4.0*h*r2*u2) + (2.0*R_pow((r - 1.0),2.0)*(- 2.0*r2*u2 + 4.0*r*u2 - 2.0*u2 + d))/(d2 - 4.0*d*r2*u2 + 8.0*d*r*u2 - 4.0*d*u2 - 16.0*r3*u4 + 24.0*r2*u4 - 16.0*r*u4 + 4.0*u4) + (4.0*hpowt*(- u*r2 + u*r))/(h*(4.0*r2*u2 - 4.0*r*u2 + 2.0*u2 - d*h)) - (d*R_pow((-(2.0*u2*(2.0*r - 1.0))/d),t))/(2.0*u2*(d + 4.0*r*u2 - 2.0*u2)) - (d*R_pow(((2.0*u2*(2.0*r2 - 2.0*r + 1.0))/d),t)*(16.0*r2*u2 - 16.0*r3*u2 + 8.0*r4*u2 - d*h - 8.0*r*u2 + 2.0*u2 - 4.0*d*r2*u + 2.0*d*h*r + 4.0*d*r*u - 2.0*d*h*r2 - 4.0*d*h*r*u + 4.0*d*h*r2*u))/(2.0*(- 4.0*r2*u2 + 4.0*r*u2 - 2.0*u2 + d)*(8.0*r4*u4 - 16.0*r3*u4 + 16.0*r2*u4 - 2.0*d*h*r2*u2 - 8.0*r*u4 + 2.0*d*h*r*u2 + 2.0*u4 - d*h*u2)));
 
@@ -1378,6 +1390,14 @@ void prob_ft(double rf, int t, double *transpr)
   transpr[4] = B_23;   /* AabB */
   transpr[5] = B_11;   /* aabb */
   transpr[6] = B_12;   /* AaBB Aabb*/
+  
+  transpr[0] = p1;   /* AABB */
+  transpr[1] = p3;   /* AABb aaBb*/
+  transpr[2] = p2;   /* AAbb */
+  transpr[3] = p4;   /* AaBb */
+  transpr[4] = p5;   /* AabB */
+  transpr[5] = p1;   /* aabb */
+  transpr[6] = p3;   /* AaBB Aabb*/
 
   //sprintf(text, "%s\t%f\t%f\t%f\n", "Marginal probabilities 7, 8, 9: ", transpr[7], transpr[8], transpr[9]);
   //Rprintf(text);
